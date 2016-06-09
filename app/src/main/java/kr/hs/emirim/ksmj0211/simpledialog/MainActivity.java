@@ -12,17 +12,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 {
     String[] items=new String[]{"젤리빈", "킷캣", "롤리팝"};
-    boolean[] checkArr={};
-    Button buy;
+    boolean[] checkArr={false, true, false};
+    Button but;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        buy=(Button)findViewById(R.id.but_dialog);
-        buy.setOnClickListener(this);
+        but=(Button)findViewById(R.id.but_dialog);
+        but.setOnClickListener(this);
     }
-
 
     public void onClick(View v){
 
@@ -34,12 +33,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     )};*/
 
-        dialog.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+        /*dialog.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 buy.setText(items[which]);
             }
+        });*/
+
+        dialog.setMultiChoiceItems(items, checkArr, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                but.setText(items[which]);
+            }
         });
+
         dialog.setIcon(R.drawable.first_icon);
         dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
